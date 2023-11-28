@@ -15,6 +15,14 @@ public class ControlCenter : MonoBehaviour
     {
         
     }
+    public void BeginGame()
+    {
+        SceneManager.LoadScene("First");
+    }
+    public void BeginTutorial()
+    {
+        SceneManager.LoadScene("StartScreen");
+    }
     public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
