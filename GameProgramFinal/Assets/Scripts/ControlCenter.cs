@@ -17,7 +17,7 @@ public class ControlCenter : MonoBehaviour
     }
     public void BeginGame()
     {
-        SceneManager.LoadScene("First");
+        SceneManager.LoadScene("Level1");
     }
     public void BeginTutorial()
     {
