@@ -4,43 +4,55 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float horizontal;
-    private float speed = 8f;
+    private float speed = 4f;
+    private float sprintSpeedMultiplier = 2f;
     private float jumpingPower = 16f;
-    private bool isfacingright = true;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-        Flip();
+        HandleMovement();
+
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-            
-        }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            rb.velocity = new Vector2 (speed*3, rb.velocity.y);
+            Jump();
         }
     }
+
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? speed * sprintSpeedMultiplier : speed;
+        rb.velocity = new Vector2(horizontal * currentSpeed, rb.velocity.y);
+
+        Flip(horizontal);
     }
-    private void Flip()
+
+    private void HandleMovement()
     {
-        if (isfacingright && horizontal < 0f || !isfacingright && horizontal > 0f) {
-        isfacingright = false;
-            Vector3 localscale = transform.localScale;
-            localscale.x *= -1f;
-            transform.localScale = localscale;
+        // Add any additional movement-related logic here if needed
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+    }
+
+    private void Flip(float horizontal)
+    {
+        if (horizontal > 0)
+        {
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else if (horizontal < 0)
+        {
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
     }
+
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
