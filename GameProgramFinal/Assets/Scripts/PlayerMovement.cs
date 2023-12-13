@@ -7,10 +7,17 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 4f;
     private float sprintSpeedMultiplier = 2f;
     private float jumpingPower = 16f;
+    private float horizontal;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    private Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     private void Update()
     {
@@ -24,11 +31,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
+        horizontal = Input.GetAxisRaw("Horizontal");
         float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? speed * sprintSpeedMultiplier : speed;
         rb.velocity = new Vector2(horizontal * currentSpeed, rb.velocity.y);
 
         Flip(horizontal);
+
+        UpdateAnim();
     }
 
     private void HandleMovement()
@@ -50,6 +59,22 @@ public class PlayerMovement : MonoBehaviour
         else if (horizontal < 0)
         {
             transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+    }
+
+    private void UpdateAnim()
+    {
+        if (horizontal > 0f)
+        {
+            anim.SetBool("Running", true);
+        }
+        else if (horizontal < 0f)
+        {
+            anim.SetBool("Running", true);
+        }
+        else
+        {
+            anim.SetBool("Running", false);
         }
     }
 
