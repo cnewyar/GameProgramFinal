@@ -15,6 +15,10 @@ public class ControlCenter : MonoBehaviour
     {
         
     }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
     public void BeginGame()
     {
         SceneManager.LoadScene("Level1");
