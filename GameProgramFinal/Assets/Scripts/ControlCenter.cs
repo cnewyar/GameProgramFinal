@@ -21,7 +21,7 @@ public class ControlCenter : MonoBehaviour
     }
     public void BeginTutorial()
     {
-        SceneManager.LoadScene("StartScreen");
+        SceneManager.LoadScene("Tutorial");
     }
     public void ResetScene()
     {
