@@ -28,8 +28,11 @@ EditorBuildSettings:
     guid: bc66ff58c4391f9408ca49c0630b1252
   - enabled: 1
     path: Assets/Scenes/Level5.unity
-    guid: 9152f1eb1f0687b40a28b2945f067893
+    guid: 47f7d5ceea67f204dbd9f96dad0e7220
   - enabled: 1
     path: Assets/Scenes/WinScreen.unity
     guid: 68ff209772be07c498cef66061d9ccd0
+  - enabled: 1
+    path: Assets/Scenes/BonusLevel.unity
+    guid: 9152f1eb1f0687b40a28b2945f067893
   m_configObjects: {}

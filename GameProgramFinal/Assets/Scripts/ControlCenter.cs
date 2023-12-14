@@ -27,6 +27,14 @@ public class ControlCenter : MonoBehaviour
     {
         SceneManager.LoadScene("Tutorial");
     }
+    public void BeginBonus()
+    {
+        SceneManager.LoadScene("BonusLevel");
+    }
+    public void BackWin()
+    {
+        SceneManager.LoadScene("WinScreen");
+    }
     public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
